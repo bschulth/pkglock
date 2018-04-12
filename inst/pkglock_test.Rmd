@@ -38,16 +38,17 @@ lockdata <- pkglock::gen_packrat_lockfile(
 # Install from packrat lockfile
 
 ```{r }
-rtdir <- pkglock::setup_runtime_template(lockdata, .dir = tmpdir)
+rtdir <- pkglock::setup_runtime_template(lockdata, .dir = file.path( getwd(),"work"))
 
 binary_runtime <- pkglock::install_runtime(rtdir, installerdir)
 
 ```
 
-# Build a descriptor from lib.loc
+# Build a descriptor from an R lib.loc
+
 ```{r}
 
-pkglist <- build_package_list_from_library_dir(.libdir = "C:/dev/apps/R/3.4.3/library")
-cat(gen_pkg_desc_from_package_list(pkglist, TRUE))
+pkglist <- pkglock::build_package_list_from_library_dir(.libdir = "C:/dev/apps/R/3.4.3/library")
+cat(pkglock::gen_pkg_desc_from_package_list(pkglist, TRUE))
 
 ```
